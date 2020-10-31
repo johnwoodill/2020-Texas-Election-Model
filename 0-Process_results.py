@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 import datetime
 
+# Prediction matrix calc
 def pred_mat(p, dat):
     # p is party and can be 'REP', 'DEM', 'OTH'
     # dat is the year of data to use
@@ -85,7 +86,6 @@ for i in unique_counties:
     
     d_pred_2018 = dem_V * d_mat_2018[idx, ].ravel()
     d_pred_2018_dat = pd.DataFrame({'corr_county': i, 'pred_year': 2018, 'county': lookup_county['County'], 'N': 'BIDEN', 'pred_v': d_pred_2018})
-    
    
     ### Get timestamp
     ct = datetime.datetime.now() 
