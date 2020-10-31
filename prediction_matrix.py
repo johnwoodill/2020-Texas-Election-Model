@@ -7,8 +7,6 @@ def pred_mat(p, dat):
     # p is party and can be 'REP', 'DEM', 'OTH'
     # dat is the year of data to use
     
-    dat[p] = pd.to_numeric(dat[p])
-    
     mat = np.zeros((len(dat.index), len(dat.index)))
     
     for i in range(len(dat.index)):
@@ -24,6 +22,6 @@ m = pred_mat('REP', dat)
 
 # Test prediction
 pred_test = 12262 * m[0,]
-pred_test.sum()
+print(pred_test.sum())
 
-dat['REP'].sum()
+print(dat['REP'].sum())
