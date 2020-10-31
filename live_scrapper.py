@@ -1,8 +1,6 @@
-import json
-from pandas.io.json import json_normalize
 import pandas as pd
-import requests
 import numpy as np
+import requests
 
 url = "https://results.texas-election.com/static/data/election/44144/108/County.json"
 
