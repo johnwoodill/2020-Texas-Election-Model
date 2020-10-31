@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import requests
+import json
 
 url = "https://results.texas-election.com/static/data/election/44144/108/County.json"
 
@@ -10,7 +11,7 @@ headers = {
 response = requests.get(url, headers=headers).json()
 
 # ### Dump json results to server
-with open("data/county_results.json", "w") as output:
+with open("data/scraped_county_results.json", "w") as output:
     json.dump(response, output, indent=4, sort_keys=True)
 
  
@@ -36,10 +37,20 @@ for v in response.values():
             outdat = pd.concat([outdat, indat])
             
             
-outdat = outdat.assign(N = np.where(outdat['P'] == 'DEM', "BIDEN", "TRUMP"))
-outdat = outdat[['county', 'id', 'N', 'P', 'V', 'PE', 'total_precincts', 'reported_precincts']].reset_index(drop=True)
+outdat = outdat.assign(N = np.where(outdat['P'] == 'DEM', "BIDEN", "TRUMP"),
+                       precinct_diff = outdat['total_precincts'] - outdat['reported_precincts'])
 
-outdat.to_csv('data/processed_live_results.csv', index=False)
+outdat = outdat[['county', 'id', 'N', 'P', 'V', 'PE', 'total_precincts', 'reported_precincts', 'precinct_diff']].reset_index(drop=True)
+outdat.to_csv('data/scraped_live_results.csv', index=False)
+
+outdat = outdat[outdat['precinct_diff'] == 0]
+outdat.to_csv('data/scraped_live_results_complete_precincts.csv', index=False)
 
 
 
+
+
+
+    
+    
+    

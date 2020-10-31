@@ -22,6 +22,9 @@ m = pred_mat('REP', dat)
 
 # Test prediction
 pred_test = 12262 * m[0,]
+
+pred_test = 3639 * m[1,]
+
 print(pred_test.sum())
 
 print(dat['REP'].sum())
