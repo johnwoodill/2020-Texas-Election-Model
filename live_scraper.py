@@ -31,16 +31,18 @@ for v in response.values():
                                  total_precincts = total_precincts,
                                  reported_precincts = reported_precincts,
                                  regist_voters = regist_voters)
-            indat = indat[(indat['id'] == 9240) | (indat['id'] == 9160)]
-            indat = indat[(indat['P'] == "REP") | (indat['P'] == "DEM")]
+            # indat = indat[(indat['id'] == 9240) | (indat['id'] == 9160)]
+            # indat = indat[(indat['P'] == "REP") | (indat['P'] == "DEM")]
             indat = indat.dropna()
             outdat = pd.concat([outdat, indat])
             
             
-outdat = outdat.assign(N = np.where(outdat['P'] == 'DEM', "BIDEN", "TRUMP"),
+outdat = outdat.assign(N = np.where(outdat['P'] == 'DEM', "BIDEN", np.where(outdat['P'] == "REP", "TRUMP", "OTH")),
                        precinct_diff = outdat['total_precincts'] - outdat['reported_precincts'])
 
-outdat = outdat[['county', 'id', 'N', 'P', 'V', 'PE', 'total_precincts', 'reported_precincts', 'precinct_diff']].reset_index(drop=True)
+outdat = outdat.groupby(['county', 'N']).agg({'V': 'sum', 'total_precincts': 'mean', 'reported_precincts': 'mean', 'regist_voters': 'sum', 'precinct_diff': 'mean'}).reset_index()
+
+outdat = outdat[['county', 'N', 'V', 'total_precincts', 'reported_precincts', 'precinct_diff']].reset_index(drop=True)
 outdat.to_csv('data/scraped_live_results.csv', index=False)
 
 outdat = outdat[outdat['precinct_diff'] == 0]

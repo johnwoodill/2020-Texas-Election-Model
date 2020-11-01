@@ -1,1 +1,1 @@
-county,id,N,P,V,PE,total_precincts,reported_precincts,precinct_diff
+county,N,V,total_precincts,reported_precincts,precinct_diff
