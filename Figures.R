@@ -71,13 +71,11 @@ ggplot(pdat1, aes(y=w_perc, x=election, fill=N)) +
   theme_classic() +
   geom_bar(stat='identity', width=.1) + 
   geom_hline(yintercept = 50, color='grey', linetype='dotted') +
-  # geom_text(aes(label=round(w_perc, 2), color=N), position=position_dodge(width=0.75), vjust=0, size=2.5) +
-  # annotate("text", x = 2, y = 5.75, label=nlabel, color='white') +
   annotate("text", x = 1, y = 10, label=trump_label, color='white', size=2.25) +
   annotate("text", x = 1, y = 90, label=biden_label, color='white', size=2.25) +
   scale_fill_manual("legend", values = c("BIDEN" = "darkblue", "TRUMP" = "red", "OTHER" = "darkgreen")) +
   scale_color_manual("legend", values = c("BIDEN" = "darkblue", "TRUMP" = "red", "OTHER" = "darkgreen")) +
-  labs(x=NULL, y=NULL, fill=NULL, title="2020 Election Results (Weighted by Year)") +
+  labs(x=NULL, y=NULL, fill=NULL, title="2020 Texas Election Results (Weighted by Year)") +
   theme(legend.title = element_blank(),
         legend.position = 'none',
         panel.border = element_rect(colour = "black", fill=NA, size=2),
