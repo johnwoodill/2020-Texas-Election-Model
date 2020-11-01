@@ -77,10 +77,14 @@ ggplot(pdat1, aes(y=w_perc, x=election, fill=N)) +
   annotate("text", x = 1, y = 90, label=biden_label, color='white', size=2.25) +
   scale_fill_manual("legend", values = c("BIDEN" = "darkblue", "TRUMP" = "red", "OTHER" = "darkgreen")) +
   scale_color_manual("legend", values = c("BIDEN" = "darkblue", "TRUMP" = "red", "OTHER" = "darkgreen")) +
-  labs(x=NULL, y=NULL, fill=NULL) +
+  labs(x=NULL, y=NULL, fill=NULL, title="2020 Election Results (Weighted by Year)") +
   theme(legend.title = element_blank(),
         legend.position = 'none',
-        panel.border = element_rect(colour = "black", fill=NA, size=2)) +
+        panel.border = element_rect(colour = "black", fill=NA, size=2),
+        plot.title = element_text(hjust = 0.5),
+        axis.title.y = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks.x = element_blank()) +
   coord_flip() +
   
   NULL
