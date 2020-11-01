@@ -24,6 +24,7 @@ print("Complete")
 
 # Load election data 
 dat_2012 = pd.read_csv('./data/TX_cnty_2012.csv').sort_values('County')
+dat_2014 = pd.read_csv('./data/TX_cnty_2014.csv').sort_values('County')
 dat_2016 = pd.read_csv('./data/TX_cnty_2016.csv').sort_values('County')
 dat_2018 = pd.read_csv('./data/TX_cnty_2018.csv').sort_values('County')
 
@@ -52,6 +53,9 @@ ldat = ldat.assign(V = [12262, 3813, 574, 3042])
 r_mat_2012 = pred_mat('REP', dat_2012)
 d_mat_2012 = pred_mat('DEM', dat_2012)
 
+r_mat_2014 = pred_mat('REP', dat_2014)
+d_mat_2014 = pred_mat('DEM', dat_2014)
+
 r_mat_2016 = pred_mat('REP', dat_2016)
 d_mat_2016 = pred_mat('DEM', dat_2016)
 
@@ -71,6 +75,9 @@ for i in unique_counties:
     r_pred_2012 = rep_V * r_mat_2012[idx, ].ravel()
     r_pred_2012_dat = pd.DataFrame({'corr_county': i, 'pred_year': 2012, 'county': lookup_county['County'], 'N': 'TRUMP', 'pred_v': r_pred_2012})
     
+    r_pred_2014 = rep_V * r_mat_2014[idx, ].ravel()
+    r_pred_2014_dat = pd.DataFrame({'corr_county': i, 'pred_year': 2014, 'county': lookup_county['County'], 'N': 'TRUMP', 'pred_v': r_pred_2014})
+    
     r_pred_2016 = rep_V * r_mat_2016[idx, ].ravel()
     r_pred_2016_dat = pd.DataFrame({'corr_county': i, 'pred_year': 2016, 'county': lookup_county['County'], 'N': 'TRUMP', 'pred_v': r_pred_2016})
     
@@ -80,6 +87,9 @@ for i in unique_counties:
     ### BIDEN predictions
     d_pred_2012 = dem_V * d_mat_2012[idx, ].ravel()
     d_pred_2012_dat = pd.DataFrame({'corr_county': i, 'pred_year': 2012, 'county': lookup_county['County'], 'N': 'BIDEN', 'pred_v': d_pred_2012})
+    
+    d_pred_2014 = dem_V * d_mat_2014[idx, ].ravel()
+    d_pred_2014_dat = pd.DataFrame({'corr_county': i, 'pred_year': 2014, 'county': lookup_county['County'], 'N': 'BIDEN', 'pred_v': d_pred_2014})
     
     d_pred_2016 = dem_V * d_mat_2016[idx, ].ravel()
     d_pred_2016_dat = pd.DataFrame({'corr_county': i, 'pred_year': 2016, 'county': lookup_county['County'], 'N': 'BIDEN', 'pred_v': d_pred_2016})
@@ -91,8 +101,8 @@ for i in unique_counties:
     ct = datetime.datetime.now() 
     
     ### Bind predictions
-    indat = pd.concat([r_pred_2012_dat, r_pred_2016_dat, r_pred_2018_dat,
-                      d_pred_2012_dat, d_pred_2016_dat, d_pred_2018_dat])
+    indat = pd.concat([r_pred_2012_dat, r_pred_2014_dat, r_pred_2016_dat, r_pred_2018_dat,
+                      d_pred_2012_dat, d_pred_2014_dat, d_pred_2016_dat, d_pred_2018_dat])
     
     ### Bind data
     indat = indat.assign(timestamp= ct)

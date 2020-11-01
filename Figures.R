@@ -3,6 +3,9 @@ library(scales)
 
 setwd("~/Projects/2020-Texas-Election-Model/")
 
+#Jon's working directory
+#setwd("/Users/Jon/Dropbox/Documents/consulting_projects/2020-Texas-Election-Model/")
+
 dat <- read_csv("data/processed_election_results.csv")
 
 
