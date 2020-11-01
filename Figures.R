@@ -21,7 +21,8 @@ pdat <- dat %>%
   group_by(pred_year) %>% 
   mutate(perc = (total_v / sum(total_v)) * 100)
 
-
+# Calculate percent of counties reporting
+per_report <- round((n_distinct(dat$corr_county) / n_distinct(dat$county)) * 100, 1)
 
 ggplot(pdat, aes(x=factor(pred_year),  y=perc, fill=factor(N))) + 
   geom_bar(stat='identity', position = "dodge") +
@@ -32,6 +33,7 @@ ggplot(pdat, aes(x=factor(pred_year),  y=perc, fill=factor(N))) +
   theme(legend.title = element_blank(),
         legend.position = c(0.9, 0.9)) +
   ylim(0, 75) +
+  annotate("text", x = as.factor(2012), y = 75, label = str_c(as.character(per_report), "% reporting"))
   NULL
 
 ggsave("figures/predictions.png", width=6, height=4)  
