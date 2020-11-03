@@ -100,7 +100,7 @@ ggplot(pdat1, aes(y=w_perc, x=election, fill=N)) +
   annotate("text", x = 1, y = 85, label=biden_label, color='white', size=3.75) +
   scale_fill_manual("legend", values = c("BIDEN" = "darkblue", "TRUMP" = "red", "OTHER" = "darkgreen")) +
   scale_color_manual("legend", values = c("BIDEN" = "darkblue", "TRUMP" = "red", "OTHER" = "darkgreen")) +
-  labs(x=NULL, y=NULL, fill=NULL, title=paste0("Last Model Update: ", Sys.time(), "\n \n \n 2020 Texas Election Results (Weighted by Year)")) +
+  labs(x=NULL, y=NULL, fill=NULL, title=paste0("Last Model Update: ", Sys.time(), "\n \n \n 2020 Texas Election Prediction")) +
   theme(legend.title = element_blank(),
         legend.position = 'none',
         panel.border = element_rect(colour = "black", fill=NA, size=2),
