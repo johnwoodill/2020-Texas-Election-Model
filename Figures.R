@@ -139,6 +139,8 @@ turnout_pdat <- dat %>%
 col_pal = c("B_plus" = "darkblue",
            "B_neg" = "red")
 
+if (length(unique(turnout_pdat$corr_county)) >= 5){
+
 ggplot(turnout_pdat) +
   geom_histogram(aes(x = BIDEN_points, fill = color),  binwidth = 0.1) +
   scale_x_continuous(limits = c(-8, 8), breaks = seq(-8, 8, by = 1)) +
@@ -153,7 +155,8 @@ ggplot(turnout_pdat) +
   labs(title = "Uncertainty in county turnout", x = "Percentage points for Biden", y = "Number of predictions")
 
 
-ggsave("figures/county_turnout_histo.png", width=6, height=4)  
+ggsave("figures/county_turnout_histo.png", width=6, height=4)
+
 
 # Combined county correlation turnout uncertainty histogram
 ggplot(turnout_pdat) +
@@ -202,5 +205,5 @@ ggplot() +
   labs(x = "Points Democratic from 2018", y = "2018 total votes", title = "Counties Reporting")
 
 ggsave("figures/cnty_reporting.png", width=6, height=4)  
-
+}
 
