@@ -4,7 +4,9 @@ library(scales)
 #setwd("~/Projects/2020-Texas-Election-Model/")
 
 #Jon's working directory
-#setwd("/Users/Jon/Dropbox/Documents/consulting_projects/2020-Texas-Election-Model/")
+setwd("/Users/Jon/Dropbox/Documents/consulting_projects/2020-Texas-Election-Model/")
+
+
 
 dat <- read_csv("data/processed_election_results.csv")
 
@@ -50,8 +52,8 @@ pdat$N <- factor(pdat$N, levels = c("TRUMP", "BIDEN", "OTHER"))
 #########
 # Remember to uncomment/comment the line below the data starts flowing.
 #########
-#ggplot(obs_pdat, aes(x=factor(pred_year),  y=perc, fill=factor(N))) + 
-ggplot(pdat, aes(x=factor(pred_year),  y=perc, fill=factor(N))) + 
+ggplot(obs_pdat, aes(x=factor(pred_year),  y=perc, fill=factor(N))) + 
+#ggplot(pdat, aes(x=factor(pred_year),  y=perc, fill=factor(N))) + 
   geom_bar(stat='identity', position = "dodge") +
   geom_text(aes(label=round(perc, 2)), position=position_dodge(width=0.75), vjust=-0.5, size=2.5) +
   theme_classic() +
@@ -71,7 +73,10 @@ ggsave("figures/predictions.png", width=6, height=4)
 
 
 
-pdat1 <- dat %>% 
+pdat1 <- dat %>%
+  # replace with observed values
+  left_join(obs_dat, by = c("county", "N")) %>%
+  mutate(pred_v = ifelse(is.na(obs_v) == F, obs_v, pred_v)) %>% 
   filter(N != "OTHER") %>%
   group_by(county, pred_year, N) %>% 
   summarise(mean_pred_v = mean(pred_v)) %>% 
@@ -195,8 +200,5 @@ ggplot() +
   labs(x = "Points Democratic from 2018", y = "2018 total votes", title = "Counties Reporting")
 
 ggsave("figures/cnty_reporting.png", width=6, height=4)  
-
-# Prediction time trend
-# Gotta figure out how to join the timestamped outputs
 
 
