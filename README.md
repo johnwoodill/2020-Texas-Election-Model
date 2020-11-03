@@ -2,6 +2,7 @@
 
 Model runs every 5 minutes with new figures. Refresh this page for new results.
 
+----------------------------------
 
 <p align="center">
 
