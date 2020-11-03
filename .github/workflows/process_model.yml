@@ -12,7 +12,8 @@ jobs:
 
     - name: Process Model
       run: |
-        python 2020-Texas-Election-Model/live_scaper.py
+        cd ~/actions-runner/_work/2020-Texas-Election-Model/2020-Texas-Election-Model/
+        python live_scaper.py
         #python 0-Process-results.py
         git add data/
         git add figures/
