@@ -158,7 +158,7 @@ if __name__ == "__main__":
     retdat.to_csv(f"data/processed_timestamp/processed_election_results_{ct}.csv")   
     
     ### Process figures
-    cmd.run('Rscript Figures.R"', check=True, shell=True)
+    cmd.run("Rscript Figures.R"', check=True, shell=True)
     
     ### Git commit/push
     cmd.run('git commit -a -m "update"', check=True, shell=True)
