@@ -162,6 +162,37 @@ ggplot(turnout_pdat) +
 
 ggsave("figures/county_corr_turnout_histo.png", width=6, height=4)  
 
+# Show counties reported and their 2018 Biden percent values
+
+cnty_2018 <- read_csv("data/TX_cnty_2018.csv") %>%
+  mutate(sum_total = REP + DEM + OTH) %>%
+  mutate(DEM_per = round(DEM / sum_total * 100, 1),
+         REP_per = round(REP / sum_total * 100, 1)) %>%
+  mutate(DEM_points = DEM_per - REP_per) %>%
+  arrange(DEM_points) %>%
+  rename(county = County)
+
+cnty_reporting <- obs_dat %>%
+  group_by(county) %>%
+  summarize(sum_v = sum(obs_v))
+
+cnty_2018_reporting <- cnty_2018 %>%
+  left_join(cnty_reporting, by = "county") %>%
+  mutate(color = ifelse(DEM_points > 0, "B_plus", "B_neg"))
+
+ggplot() +
+  geom_bar(data = cnty_2018, aes(x = DEM_points, y = sum_total), stat = "identity", color = "grey") +
+  geom_bar(data = cnty_2018_reporting, aes(x = DEM_points, y = sum_v, color = color), stat = "identity") +
+  theme_classic() +
+  geom_vline(xintercept = 0, color='grey', linetype='dotted') +
+  scale_color_manual(
+    values = col_pal,
+    limits = names(col_pal)
+  ) +
+  theme(legend.position = "none") +
+  labs(x = "Points Democratic from 2018", y = "2018 total votes", title = "Counties Reporting")
+
+ggsave("figures/cnty_reporting.png", width=6, height=4)  
 
 # Prediction time trend
 # Gotta figure out how to join the timestamped outputs
