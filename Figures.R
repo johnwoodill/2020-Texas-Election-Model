@@ -4,7 +4,7 @@ library(scales)
 #setwd("~/Projects/2020-Texas-Election-Model/")
 
 #Jon's working directory
-# setwd("/Users/Jon/Dropbox/Documents/consulting_projects/2020-Texas-Election-Model/")
+#setwd("/Users/Jon/Dropbox/Documents/consulting_projects/2020-Texas-Election-Model/")
 
 
 
@@ -33,6 +33,8 @@ obs_pdat <- dat %>%
   summarise(total_v = sum(mean_pred_v)) %>% 
   group_by(pred_year) %>% 
   mutate(perc = (total_v / sum(total_v)) * 100)
+
+obs_pdat$N <- factor(obs_pdat$N, levels = c("TRUMP", "BIDEN", "OTHER"))
 
 pdat <- dat %>%
   group_by(county, pred_year, N) %>% 
@@ -139,11 +141,11 @@ turnout_pdat <- dat %>%
 col_pal = c("B_plus" = "darkblue",
            "B_neg" = "red")
 
-if (length(unique(turnout_pdat$corr_county)) >= 5){
+#if (length(unique(turnout_pdat$corr_county)) >= 5){
 
 ggplot(turnout_pdat) +
   geom_histogram(aes(x = BIDEN_points, fill = color),  binwidth = 0.1) +
-  scale_x_continuous(limits = c(-8, 8), breaks = seq(-8, 8, by = 1)) +
+  #scale_x_continuous(limits = c(-8, 8), breaks = seq(-8, 8, by = 1)) +
   geom_vline(xintercept = 0, color='grey', linetype='dotted') +
   theme_classic() +
   theme(legend.position = "none") +
@@ -161,7 +163,7 @@ ggsave("figures/county_turnout_histo.png", width=6, height=4)
 # Combined county correlation turnout uncertainty histogram
 ggplot(turnout_pdat) +
   geom_histogram(aes(x = BIDEN_points, fill = color),  binwidth = 0.1) +
-  scale_x_continuous(limits = c(-8, 8), breaks = seq(-8, 8, by = 1)) +
+  #scale_x_continuous(limits = c(-8, 8), breaks = seq(-8, 8, by = 1)) +
   geom_vline(xintercept = 0, color='grey', linetype='dotted') +
   theme_classic() +
   theme(legend.position = "none") +
@@ -205,5 +207,5 @@ ggplot() +
   labs(x = "Points Democratic from 2018", y = "2018 total votes", title = "Counties Reporting")
 
 ggsave("figures/cnty_reporting.png", width=6, height=4)  
-}
+#}
 
