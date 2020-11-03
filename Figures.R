@@ -19,7 +19,7 @@ head(dat)
 obs_dat <- dat %>%
   filter(corr_county == county) %>%
   group_by(county, N) %>%
-  summarize(obs_v = first(pred_v))
+  summarise(obs_v = first(pred_v))
 
 # Replace predicted with observed for counties observed
 obs_pdat <- dat %>%
@@ -96,6 +96,8 @@ pdat1$N <- factor(pdat1$N, arrange(pdat1, w_perc)$N)
 
 trump_label = paste0("Trump: ", round(filter(pdat1, N == "TRUMP")$w_perc, 2), "%")
 biden_label = paste0("Biden: ", round(filter(pdat1, N == "BIDEN")$w_perc, 2), "%")
+
+pdat1$N <- factor(pdat1$N, levels=c("BIDEN", "TRUMP"))
 
 ggplot(pdat1, aes(y=w_perc, x=election, fill=N)) + 
   theme_classic() +
@@ -181,7 +183,7 @@ cnty_2018 <- read_csv("data/TX_cnty_2018.csv") %>%
 
 cnty_reporting <- obs_dat %>%
   group_by(county) %>%
-  summarize(sum_v = sum(obs_v))
+  summarise(sum_v = sum(obs_v))
 
 cnty_2018_reporting <- cnty_2018 %>%
   left_join(cnty_reporting, by = "county") %>%
