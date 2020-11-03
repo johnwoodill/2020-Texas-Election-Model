@@ -132,7 +132,8 @@ col_pal = c("B_plus" = "darkblue",
 
 ggplot(turnout_pdat) +
   geom_histogram(aes(x = BIDEN_points, fill = color),  binwidth = 0.1) +
-  scale_x_continuous(breaks = seq(-10, 10, by = 0.1)) +
+  scale_x_continuous(limits = c(-8, 8), breaks = seq(-8, 8, by = 1)) +
+  geom_vline(xintercept = 0, color='grey', linetype='dotted') +
   theme_classic() +
   theme(legend.position = "none") +
   scale_fill_manual(
@@ -148,7 +149,8 @@ ggsave("figures/county_turnout_histo.png", width=6, height=4)
 # Combined county correlation turnout uncertainty histogram
 ggplot(turnout_pdat) +
   geom_histogram(aes(x = BIDEN_points, fill = color),  binwidth = 0.1) +
-  scale_x_continuous(breaks = seq(-10, 10, by = 0.1)) +
+  scale_x_continuous(limits = c(-8, 8), breaks = seq(-8, 8, by = 1)) +
+  geom_vline(xintercept = 0, color='grey', linetype='dotted') +
   theme_classic() +
   theme(legend.position = "none") +
   scale_fill_manual(
@@ -159,4 +161,9 @@ ggplot(turnout_pdat) +
 
 
 ggsave("figures/county_corr_turnout_histo.png", width=6, height=4)  
+
+
+# Prediction time trend
+# Gotta figure out how to join the timestamped outputs
+
 
