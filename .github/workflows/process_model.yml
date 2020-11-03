@@ -1,0 +1,30 @@
+name: Process 2020 Texas Election Model
+
+on: push
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v1   
+
+    - name: Process Model
+      run: |
+        python live_scaper.py
+        #python 0-Process-results.py
+        git add data/
+        git add figures/
+        
+    - name: Commit files
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git commit -m "Updating GP model" -a
+            
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.TOKEN }}
+    
