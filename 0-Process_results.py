@@ -164,6 +164,7 @@ if __name__ == "__main__":
         cmd.run("Rscript Figures.R", check=True, shell=True)
 
         ### Git commit/push
+        cmd.run('git add figures/*', check=True, shell=True)
         cmd.run('git commit -a -m "update"', check=True, shell=True)
         cmd.run("git push origin main", check=True, shell=True)
 
