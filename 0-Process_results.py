@@ -168,7 +168,12 @@ if __name__ == "__main__":
         cmd.run('git commit -a -m "update"', check=True, shell=True)
         cmd.run("git push origin main", check=True, shell=True)
 
+        print(f"")
+        print(f"")
+        print(f"----------------------------------------------------------------")
         print(f"Finished Processing model: {ct} ..... Pausing for 5 minutes")
+        print(f"----------------------------------------------------------------")
+        
         time.sleep(60 * 5) # Delay for 5 minutes
         
 
