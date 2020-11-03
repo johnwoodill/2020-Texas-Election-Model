@@ -58,14 +58,14 @@ if __name__ == "__main__":
             # Test data
             # !!!!!!!!!!!!!!!!!!!!!!!!!
 
-            # t_dat_2012 = dat_2018[['County', 'REP', 'DEM', 'OTH']]
-            # t_dat_2012.columns = ['county', 'TRUMP', 'BIDEN', 'OTH']
+            t_dat_2012 = dat_2018[['County', 'REP', 'DEM', 'OTH']]
+            t_dat_2012.columns = ['county', 'TRUMP', 'BIDEN', 'OTH']
 
-            # t_dat_2012 = t_dat_2012.melt(id_vars='county')
-            # t_dat_2012.columns = ['county', 'N', 'V']
-            # t_dat_2012 = t_dat_2012.sort_values(['county']).reset_index(drop=True)
+            t_dat_2012 = t_dat_2012.melt(id_vars='county')
+            t_dat_2012.columns = ['county', 'N', 'V']
+            t_dat_2012 = t_dat_2012.sort_values(['county']).reset_index(drop=True)
 
-            # ldat = ldat.drop(columns='V').merge(t_dat_2012, how='outer', on=['county', 'N'])
+            ldat = ldat.drop(columns='V').merge(t_dat_2012, how='outer', on=['county', 'N'])
 
             # !!!!!!!!!!!!!!!!!!!!!!!!!
 
