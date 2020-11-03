@@ -31,3 +31,13 @@
 
 
 
+<br>
+<br>
+<br>
+<br>
+
+
+<img align="center" width="800" src="https://raw.githubusercontent.com/johnwoodill/2020-Texas-Election-Model/main/figures/cnty_reporting.png?raw=true">
+
+
+
