@@ -45,7 +45,7 @@ outdat = outdat.groupby(['county', 'N']).agg({'V': 'sum', 'total_precincts': 'me
 outdat = outdat[['county', 'N', 'V', 'total_precincts', 'reported_precincts', 'precinct_diff']].reset_index(drop=True)
 outdat.to_csv('data/scraped_live_results.csv', index=False)
 
-outdat = outdat[outdat['precinct_diff'] == 0]
+#outdat = outdat[outdat['precinct_diff'] == 0]
 outdat.to_csv('data/scraped_live_results_complete_precincts.csv', index=False)
 
 
