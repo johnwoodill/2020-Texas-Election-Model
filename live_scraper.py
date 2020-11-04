@@ -3,7 +3,7 @@ import numpy as np
 import requests
 import json
 
-url = "https://results.texas-election.com/static/data/election/44144/108/County.json"
+url = "https://results.texas-election.com/static/data/election/44144/130/County.json"
 
 headers = {
     "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36",
@@ -45,7 +45,7 @@ outdat = outdat.groupby(['county', 'N']).agg({'V': 'sum', 'total_precincts': 'me
 outdat = outdat[['county', 'N', 'V', 'total_precincts', 'reported_precincts', 'precinct_diff']].reset_index(drop=True)
 outdat.to_csv('data/scraped_live_results.csv', index=False)
 
-#outdat = outdat[outdat['precinct_diff'] == 0]
+outdat = outdat[outdat['precinct_diff'] == 0]
 outdat.to_csv('data/scraped_live_results_complete_precincts.csv', index=False)
 
 
