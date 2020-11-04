@@ -1,3 +1,7 @@
+### MODEL IS CLOSED SINCE THE TEXAS CALL
+
+------------------------------
+
 ### 2020 Texas Election Model (Live at 6pm EST)
 
 Model runs every 5 minutes with new figures. Refresh this page for new results.
