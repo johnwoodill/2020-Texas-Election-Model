@@ -3,7 +3,7 @@ import numpy as np
 import requests
 import json
 
-url = "https://results.texas-election.com/static/data/election/44144/148/County.json"
+url = "https://results.texas-election.com/static/data/election/44144/155/County.json"
 
 headers = {
     "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36",
